@@ -1,26 +1,28 @@
 <template>
-    <el-row type="flex" class="row-bg" style="margin-top: 80px" justify="center">
-        <el-col :span="6">
-            <el-form  :model="loginForm" :rules="loginRules"  ref="loginForm" >
-                <el-form-item prop="userName">
-                    <el-input v-model="loginForm.userName" placeholder="用  户  名"></el-input>
-                </el-form-item>
-                <el-form-item prop="passWord">
-                    <el-input name="passWord" :type="passwordType" @keyup.enter.native="flag && handleLogin()" v-model="loginForm.passWord" autoComplete="off" placeholder="密  码" />
-                </el-form-item>
-                <!--<div style="width: 200px">-->
-                    <el-row type="flex" class="row-bg" justify="center">
-                        <el-col :span="12">
-                            <el-button type="primary" :loading="loading" @click="flag && handleLogin()"><i class="todo-denglu"></i>登录</el-button>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-button type="info"   @click="jumpSignup"><i class="todo-zhuce"></i>注册</el-button>
-                        </el-col>
-                    </el-row>
-                <!--</div>-->
-            </el-form>
-         </el-col>
-    </el-row>
+   <div class="b">
+       <el-row type="flex" class="row-bg" style="margin-top: 80px" justify="center">
+           <el-col :span="6">
+               <el-form  :model="loginForm" :rules="loginRules"  ref="loginForm" >
+                   <el-form-item prop="userName">
+                       <el-input v-model="loginForm.userName" placeholder="用  户  名"></el-input>
+                   </el-form-item>
+                   <el-form-item prop="passWord">
+                       <el-input name="passWord" :type="passwordType" @keyup.enter.native="flag && handleLogin()" v-model="loginForm.passWord" autoComplete="off" placeholder="密  码" />
+                   </el-form-item>
+                   <!--<div style="width: 200px">-->
+                   <el-row type="flex" class="row-bg" justify="center">
+                       <el-col :span="12">
+                           <el-button type="primary" :loading="loading" @click="flag && handleLogin()"><i class="todo-denglu"></i>登录</el-button>
+                       </el-col>
+                       <el-col :span="12">
+                           <el-button type="info"   @click="jumpSignup"><i class="todo-zhuce"></i>注册</el-button>
+                       </el-col>
+                   </el-row>
+                   <!--</div>-->
+               </el-form>
+           </el-col>
+       </el-row>
+   </div>
 </template>
 
 <script>
@@ -89,5 +91,12 @@
 </script>
 
 <style scoped>
-
+.b{
+    background:url('./../assets/backgroud.jpg') center 0 no-repeat;
+    background-size:cover;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: #2d3a4b;
+}
 </style>

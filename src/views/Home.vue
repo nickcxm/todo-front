@@ -1,91 +1,93 @@
 <template>
-  <div style="margin-top: 80px" class="home" >
-    <el-row >
-      <el-col :span="3"  class="left" style="margin-right:10px;margin-left:10px;">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>{{user.nickName}}</span>
-            <i style="margin-left: 15px"  class="todo-dengchu" @click="logout"></i>
-          </div>
-          <el-button type="text"  @click="getImportant">
-            重要的任务
-          </el-button>
-          <div v-for="g in this.groups"  class="text item">
-            <el-button type="text"  @click="getMissions(g)">
-              {{g.groupname}}
-            </el-button>
-            <i style="margin-left: 15px"  class="todo-shanchu" @click="deleteGroup(g)"></i>
-          </div>
-          <el-popover
-                  placement="left-end"
-                  width="200"
-                  v-model="groupVisible">
-            <el-form :model="groupForm" status-icon :rules="groupRules"  ref="groupForm" label-width="120px" class="demo-ruleForm">
-              <el-form-item label="分组名" prop="groupname">
-                <el-input type="textarea" v-model="groupForm.groupname"></el-input>
-              </el-form-item>
-            </el-form>
-            <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="groupVisible = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="addGroup">确定</el-button>
+  <div style=""  class="b" >
+    <div>
+      <el-row style="margin-top: 80px">
+        <el-col :span="3"  class="left" style="margin-right:10px;margin-left:10px;">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>{{user.nickName}}</span>
+              <i style="margin-left: 15px"  class="todo-dengchu" @click="logout"></i>
             </div>
-            <el-button slot="reference" style="float: right; padding: 3px 0"  type="text"><i class="todo-tianjia"></i></el-button>
-          </el-popover>
-        </el-card>
-      </el-col>
-      <el-col :span="20" style="margin-left: 20px">
-        <el-card class="box-card" shadow="hover">
-          <div slot="header" class="clearfix">
-            <span v-if="!isImportant">{{group.groupname}}</span>
-            <span v-else>重要的任务</span>
+            <el-button type="text"  @click="getImportant">
+              重要的任务
+            </el-button>
+            <div v-for="g in this.groups"  class="text item">
+              <el-button type="text"  @click="getMissions(g)">
+                {{g.groupname}}
+              </el-button>
+              <i style="margin-left: 15px"  class="todo-shanchu" @click="deleteGroup(g)"></i>
+            </div>
             <el-popover
-                    v-if="!isImportant"
                     placement="left-end"
                     width="200"
-                    v-model="visible2">
-              <el-form :model="missionForm" status-icon :rules="rules"  ref="ruleForm2" label-width="120px" class="demo-ruleForm">
-                <el-form-item label="todo信息" prop="text">
-                  <el-input type="textarea" v-model="missionForm.text"></el-input>
-                </el-form-item>
-                <el-form-item label="重要">
-                  <el-switch v-model="missionForm.important"></el-switch>
+                    v-model="groupVisible">
+              <el-form :model="groupForm" status-icon :rules="groupRules"  ref="groupForm" label-width="120px" class="demo-ruleForm">
+                <el-form-item label="分组名" prop="groupname">
+                  <el-input type="textarea" v-model="groupForm.groupname"></el-input>
                 </el-form-item>
               </el-form>
               <div style="text-align: right; margin: 0">
-                <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
-                <el-button type="primary" size="mini" @click="addMission">确定</el-button>
+                <el-button size="mini" type="text" @click="groupVisible = false">取消</el-button>
+                <el-button type="primary" size="mini" @click="addGroup">确定</el-button>
               </div>
               <el-button slot="reference" style="float: right; padding: 3px 0"  type="text"><i class="todo-tianjia"></i></el-button>
             </el-popover>
-          </div>
+          </el-card>
+        </el-col>
+        <el-col :span="20" style="margin-left: 20px">
+          <el-card class="box-card" >
+            <div slot="header" class="clearfix">
+              <span v-if="!isImportant">{{group.groupname}}</span>
+              <span v-else>重要的任务</span>
+              <el-popover
+                      v-if="!isImportant"
+                      placement="left-end"
+                      width="200"
+                      v-model="visible2">
+                <el-form :model="missionForm" status-icon :rules="rules"  ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+                  <el-form-item label="todo信息" prop="text">
+                    <el-input type="textarea" v-model="missionForm.text"></el-input>
+                  </el-form-item>
+                  <el-form-item label="重要">
+                    <el-switch v-model="missionForm.important"></el-switch>
+                  </el-form-item>
+                </el-form>
+                <div style="text-align: right; margin: 0">
+                  <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
+                  <el-button type="primary" size="mini" @click="addMission">确定</el-button>
+                </div>
+                <el-button slot="reference" style="float: right; padding: 3px 0"  type="text"><i class="todo-tianjia"></i></el-button>
+              </el-popover>
+            </div>
 
-          <div v-for="m in missions"  class="text item" >
-            <el-row>
-              <el-col :span="2">
-                <el-switch
-                        :ref="m.id"
-                        v-model="m.status"
-                        active-color="#13ce66"
-                        inactive-color="#ff4949"
-                        style="margin-top: 22px"
-                        active-value="1"
-                        inactive-value="0"
-                        @change="changeMissionStatus(m)"
-                        >
-                </el-switch>
-              </el-col>
-              <el-col :span="21">
-                <h4 :class="{complete:m.status==1}" style="margin-left: 20px;margin-right: 20px;text-align: left;"><i  :class="{'todo-star':m.important,'todo-xingxing':!m.important}" @click="important(m)"></i> {{m.text}}</h4>
-              </el-col>
-              <el-col :span="1" >
-                <!--<el-button @click="deleteMission(m)" type="danger" size="mini" style="margin-top: 18px" icon="el-icon-delete" circle></el-button>-->
-                <el-button @click="deleteMission(m)" type="danger" size="mini" style="margin-top: 18px" icon="todo-shanchu" circle></el-button>
-              </el-col>
-            </el-row>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+            <div v-for="m in missions"  class="text item" >
+              <el-row>
+                <el-col :span="2">
+                  <el-switch
+                          :ref="m.id"
+                          v-model="m.status"
+                          active-color="#13ce66"
+                          inactive-color="#ff4949"
+                          style="margin-top: 22px"
+                          active-value="1"
+                          inactive-value="0"
+                          @change="changeMissionStatus(m)"
+                  >
+                  </el-switch>
+                </el-col>
+                <el-col :span="21">
+                  <h4 :class="{complete:m.status==1}" style="margin-left: 20px;margin-right: 20px;text-align: left;"><i  :class="{'todo-star':m.important,'todo-xingxing':!m.important}" @click="important(m)"></i> {{m.text}}</h4>
+                </el-col>
+                <el-col :span="1" >
+                  <!--<el-button @click="deleteMission(m)" type="danger" size="mini" style="margin-top: 18px" icon="el-icon-delete" circle></el-button>-->
+                  <el-button @click="deleteMission(m)" type="danger" size="mini" style="margin-top: 18px" icon="todo-shanchu" circle></el-button>
+                </el-col>
+              </el-row>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -315,5 +317,14 @@ body{
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+.b{
+  background:url('./../assets/backgroud.jpg') center 0 no-repeat;
+  background-size:cover;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #2d3a4b;
 }
 </style>
