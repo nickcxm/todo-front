@@ -90,7 +90,7 @@
     }
 </script>
 
-<style scoped>
+<style >
 .b{
     background:url('./../assets/backgroud.jpg') center 0 no-repeat;
     background-size:cover;
@@ -98,5 +98,7 @@
     height: 100%;
     width: 100%;
     background-color: #2d3a4b;
+    margin-left: -8px;
+    margin-top: -8px;
 }
 </style>

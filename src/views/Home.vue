@@ -326,5 +326,7 @@ body{
   height: 100%;
   width: 100%;
   background-color: #2d3a4b;
+  margin-left: -8px;
+  margin-top: -8px;
 }
 </style>
